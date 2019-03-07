@@ -1,4 +1,3 @@
-# SemQ
-Semantic Quantization for Better Word Representation
+# HiGRU: Hierarchical Gated Units for Utterance-level Emotion Recognition
 
-The project aims to quantify the semantic and syntactic information of each single words and incorporate such information into word vectors or related evaluation appoaches.
+The project aims at recognizing the emotion evolution of speakers in conversations.
