@@ -1,7 +1,4 @@
-""" Build dicts and turn sentences into indices
-	Worddict is built and shared between Emotion dataset and SNLI dataset,
-	but emotion labels and NLI labels are separated.
-"""
+""" Build dicts and index tokens and labels. """
 
 import time
 import re
