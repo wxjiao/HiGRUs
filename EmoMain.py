@@ -95,7 +95,7 @@ def main():
 
 	# Choose focused emotions
 	focus_emo = Const.four_emo
-	if args.dataset == 'IEMOCAP4v2':
+	if args.dataset == 'IEMOCAP':
 		focus_emo = Const.four_iem
 	print("Focused emotion labels {}".format(focus_emo))
 
@@ -116,7 +116,7 @@ def main():
 	                emodict=emodict,
 	                args=args,
 	                focus_emo=focus_emo)
-	print("Test: ACCs-F1s-WA-UWA-F1-val {}".format(pAccs))
+	print("Test: ACCs-WA-UWA {}".format(pAccs))
 
 	# Save the test results
 	record_file = '{}/{}_{}.txt'.format(args.save_dir, args.type, args.dataset)
