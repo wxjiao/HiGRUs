@@ -1,4 +1,4 @@
-""" Build dicts and index tokens and labels. """
+""" Build dicts and index tokens and labels. The dicts and data are saved into .pt file for further loading. """
 
 import time
 import re
