@@ -1,4 +1,4 @@
-""" BiAtt flow, LSTM """
+""" functions, layers, and architecture of HiGRU """
 import numpy as np
 import math
 import torch
@@ -9,7 +9,7 @@ from torch.nn.utils.rnn import pack_padded_sequence,pad_packed_sequence
 import Const
 
 
-# Normal attention
+# Dot-product attention
 def get_attention(q, k, v, attn_mask=None):
 	"""
 	:param : (batch, seq_len, seq_len)
@@ -24,6 +24,7 @@ def get_attention(q, k, v, attn_mask=None):
 	return output, attn
 
 
+# Get mask for attention
 def get_attn_pad_mask(seq_q, seq_k):
 	assert seq_q.dim() == 2 and seq_k.dim() == 2
 
@@ -34,7 +35,7 @@ def get_attn_pad_mask(seq_q, seq_k):
 	return pad_attn_mask.cuda(seq_k.device)
 
 
-# Handle variable lengths
+# Pad for utterances with variable lengths and maitain the order of them after GRU
 class GRUencoder(nn.Module):
 	def __init__(self, d_emb, d_out, num_layers):
 		super(GRUencoder, self).__init__()
@@ -74,7 +75,7 @@ class GRUencoder(nn.Module):
 		return output
 
 
-# GRU encoder
+# Utterance encoder with three types: higru, higru-f, and higru-sf
 class UttEncoder(nn.Module):
 	def __init__(self, d_word_vec, d_h1, type):
 		super(UttEncoder, self).__init__()
@@ -116,7 +117,7 @@ class UttEncoder(nn.Module):
 		return output
 
 
-# HiGRU with three types: HiGRU, HiGRU-f, HiGRU-sf
+# The overal HiGRU model with three types: HiGRU, HiGRU-f, HiGRU-sf
 class HiGRU(nn.Module):
 	def __init__(self, d_word_vec, d_h1, d_h2, d_fc, emodict, worddict, embedding, type='higru'):
 		super(HiGRU, self).__init__()
