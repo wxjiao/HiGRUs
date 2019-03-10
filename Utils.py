@@ -153,48 +153,6 @@ def load_pretrain(d_word_vec, diadict, type='word2vec'):
 	return embedding
 
 
-def load_char_vec(filename, vocab):
-	"""
-	Loads 300x1 char vecs from glove.840B.300d-char.txt
-	dtype: glove float64;
-	UTF-8, but output is encoded in ISO-8859-1
-	"""
-	char_vecs = {}
-	with open(filename, "r") as f:
-		vocab_size = 94
-		layer_size = 300
-		num_tobe_assigned = 0
-		for line in f:
-			splitline = line.split()
-			char = splitline[0]
-			if char in vocab:
-				vector = np.array([float(v) for v in splitline[1:]])
-				assert len(vector) == layer_size
-				char_vecs[char] = vector / np.sqrt(sum(vector**2))
-				num_tobe_assigned += 1
-		print("Found chars {} in {}".format(vocab_size, filename))
-		match_rate = round(num_tobe_assigned/len(vocab)*100, 2)
-		print("Matched chars {}, matching rate {} %".format(num_tobe_assigned, match_rate))
-	return char_vecs
-
-
-def load_charvecs(d_char_vec, n_chars, char2idx):
-	""" initialize nn.Embedding with pretrained """
-	filename = 'glove.840B.300d-char.txt'
-	char2vec = load_char_vec(filename, char2idx)
-
-	# initialize a numpy tensor
-	embedding = np.random.uniform(-0.01, 0.01, (n_chars, d_char_vec))
-	for c, v in char2vec.items():
-		embedding[char2idx[c]] = v
-
-	# zero padding
-	embedding[Const.cPAD] = np.zeros(d_char_vec)
-
-	return embedding
-
-
-
 def shuffle_lists(featllist, labellist=None, thirdparty=None):
 
 	if labellist == None:
@@ -211,7 +169,7 @@ def shuffle_lists(featllist, labellist=None, thirdparty=None):
 		featllist, labellist, thirdparty = zip(*combined)
 		return featllist, labellist, thirdparty
 
-
+# clipping could be down by Pytorch function: torch.nn.utils.clip_grad_norm_
 def param_clip(model, optimizer, batch_size, max_norm=10):
 	# gradient clipping
 	shrink_factor = 1
