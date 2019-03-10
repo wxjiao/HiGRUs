@@ -31,7 +31,7 @@ def emotrain(model, data_loader, tr_emodict, emodict, args, focus_emo):
 
 	# Weight for loss
 	weight_rate = 0.75
-	if args.dataset in ['IEMOCAP4v2']:
+	if args.dataset in ['IEMOCAP']:
 		weight_rate = 0
 	weights = torch.from_numpy(loss_weight(tr_emodict, emodict, focus_emo, rate=weight_rate)).float()
 	print("Dataset {} Weight rate {} \nEmotion rates {} \nLoss weights {}\n".format(
@@ -85,7 +85,7 @@ def emotrain(model, data_loader, tr_emodict, emodict, args, focus_emo):
 		print("Validate: ACCs-WA-UWA {}".format(pAccs))
 
 		last_best = pAccs[-1]  # UWA
-		if args.dataset in ['IEMOCAP4v2']:
+		if args.dataset in ['IEMOCAP']:
 			last_best = pAccs[-2] # WA
 		if last_best > cur_best:
 			Utils.model_saver(model, args.save_dir, args.type, args.dataset)
@@ -123,7 +123,7 @@ def emoeval(model, data_loader, tr_emodict, emodict, args, focus_emo):
 
 	# weight for loss
 	weight_rate = 0.75 # eval state without weights
-	if args.dataset in ['MOSI', 'IEMOCAP4v2']:
+	if args.dataset in ['IEMOCAP']:
 		weight_rate = 0
 	weights = torch.from_numpy(loss_weight(tr_emodict, emodict, focus_emo, rate=weight_rate)).float()
 
