@@ -14,6 +14,7 @@ import Const
 from Utils import saveToPickle, loadFrPickle,timeSince
 
 
+# Dictionary class for both the scripts and the labels
 class Dictionary:
 	def __init__(self, name):
 		self.name = name
@@ -26,7 +27,7 @@ class Dictionary:
 		self.max_length = 0
 		self.max_dialog = 0
 
-
+	# delete the rare words by the threshold min_count
 	def delRare(self, min_count, padunk=True):
 
 		# collect rare words
@@ -66,13 +67,15 @@ class Dictionary:
 			self.pre_word2count[word] += 1
 
 
-# Preprocess of words
+# Normalize strings
 def unicodeToAscii(str):
 	return ''.join(
 		c for c in unicodedata.normalize('NFD', str)
 		if unicodedata.category(c) != 'Mn'
 	)
 
+
+# Remove nonalphabetics
 def normalizeString(str):
 	str = unicodeToAscii(str.lower().strip())
 	str = re.sub(r"([!?])", r" \1", str)
@@ -80,16 +83,18 @@ def normalizeString(str):
 	return str
 
 
+# Read in scripts and labels from the dataset
 def readUtterance(filename):
 	with open(filename, encoding='utf-8') as data_file:
 		data = json.loads(data_file.read())
 
 	diadata = [[normalizeString(utter['utterance']) for utter in dialog] for dialog in data]
-
 	emodata = [[utter['emotion'] for utter in dialog] for dialog in data]
+	
 	return diadata, emodata
 
 
+# Build the dict for either scripts or labels
 def buildEmodict(dirt, phaselist, diadict, emodict):
 	""" build dicts for words and emotions """
 	print("Building dicts for emotion dataset...")
@@ -109,6 +114,7 @@ def buildEmodict(dirt, phaselist, diadict, emodict):
 	return diadict, emodict
 
 
+# Index the tokens or the labels
 def indexEmo(dirt, phase, diadict, emodict, max_seq_len=60):
 
 	filename = dirt + phase + '.json'
@@ -139,6 +145,7 @@ def indexEmo(dirt, phase, diadict, emodict, max_seq_len=60):
 	return diafield
 
 
+# Overall preprocessing function
 def proc_emoset(dirt, phaselist, emoset, min_count, max_seq_len):
 	""" Build data from emotion sets """
 
