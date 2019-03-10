@@ -35,7 +35,7 @@ def get_attn_pad_mask(seq_q, seq_k):
 	return pad_attn_mask.cuda(seq_k.device)
 
 
-# Pad for utterances with variable lengths and maitain the order of them after GRU
+# Pad for utterances with variable lengths and maintain the order of them after GRU
 class GRUencoder(nn.Module):
 	def __init__(self, d_emb, d_out, num_layers):
 		super(GRUencoder, self).__init__()
