@@ -1,6 +1,4 @@
-"""
-main function for wordCNN or +charCNN training
-"""
+""" Main function """
 import os
 import argparse
 import Utils
@@ -11,8 +9,6 @@ from EmoTrain import emotrain, emoeval
 from datetime import datetime
 import math
 import time
-#str(datetime.now())
-#'2011-05-03 17:45:35.177000'
 
 
 def main():
@@ -20,49 +16,49 @@ def main():
 
 	parser = argparse.ArgumentParser()
 
-	# learning
-	parser.add_argument('-lr', type=float, default=2.5e-4) # 2.5e-4 for Friends and EmotionPush, 1e-4 for IEMOCAP
-	parser.add_argument('-decay', type=float, default=math.pow(0.5, 1/20)) # math.pow(0.5, 1/20)
-	parser.add_argument('-epochs', type=int, default=200)
-	parser.add_argument('-patience', type=int, default=10,
+	# Learning
+	parser.add_argument('-lr', type=float, default=2.5e-4)		# Learning rate: 2.5e-4 for Friends and EmotionPush, 1e-4 for IEMOCAP
+	parser.add_argument('-decay', type=float, default=math.pow(0.5, 1/20))	# half lr every 20 epochs
+	parser.add_argument('-epochs', type=int, default=200)		# Defualt epochs 200
+	parser.add_argument('-patience', type=int, default=10,		# Patience of early stopping 10 epochs
 	                    help='patience for early stopping')
-	parser.add_argument('-save_dir', type=str, default="snapshot",
+	parser.add_argument('-save_dir', type=str, default="snapshot",	# Save the model and results in snapshot/
 	                    help='where to save the models')
-	# data
-	parser.add_argument('-dataset', type=str, default='Friends',
+	# Data
+	parser.add_argument('-dataset', type=str, default='Friends',	# Default dataset Friends
 	                    help='dataset')
-	parser.add_argument('-data_path', type=str, required = True,
+	parser.add_argument('-data_path', type=str, required = True
 	                    help='data path')
 	parser.add_argument('-vocab_path', type=str, required=True,
-	                    help='global vocabulary path')
+	                    help='vocabulary path')
 	parser.add_argument('-emodict_path', type=str, required=True,
 	                    help='emotion label dict path')
 	parser.add_argument('-tr_emodict_path', type=str, default=None,
 	                    help='training set emodict path')
-	parser.add_argument('-max_seq_len', type=int, default=80, # 80 for emotion
+	parser.add_argument('-max_seq_len', type=int, default=80,	# Pad each utterance to 80 tokens
 	                    help='the sequence length')
 	# model
-	parser.add_argument('-type', type=str, default='higru',
+	parser.add_argument('-type', type=str, default='higru', 	# Model type: default HiGRU 
 	                    help='choose the low encoder')
-	parser.add_argument('-d_word_vec', type=int, default=300,
+	parser.add_argument('-d_word_vec', type=int, default=300,	# Embeddings size 300
 	                    help='the word embeddings size')
-	parser.add_argument('-d_h1', type=int, default=300,
+	parser.add_argument('-d_h1', type=int, default=300,		# Lower-level RNN hidden state size 300
 	                    help='the hidden size of rnn1')
-	parser.add_argument('-d_h2', type=int, default=300,
+	parser.add_argument('-d_h2', type=int, default=300,		# Upper-level RNN hidden state size 300
 	                    help='the hidden size of rnn1')
-	parser.add_argument('-d_fc', type=int, default=100,
+	parser.add_argument('-d_fc', type=int, default=100,		# FC size 100
 	                    help='the size of fc')
-	parser.add_argument('-gpu', type=str, default=None,
+	parser.add_argument('-gpu', type=str, default=None,		# Spcify the GPU for training
 	                    help='gpu: default 0')
-	parser.add_argument('-embedding', type=str, default=None,
+	parser.add_argument('-embedding', type=str, default=None,	# Stored embedding path
 	                    help='filename of embedding pickle')
-	parser.add_argument('-report_loss', type=int, default=720,
+	parser.add_argument('-report_loss', type=int, default=720,	# Report loss interval, default the number of dialogues
 	                    help='how many steps to report loss')
 
 	args = parser.parse_args()
 	print(args, '\n')
 
-	# load vocabs
+	# Load vocabs
 	print("Loading vocabulary...")
 	worddict = Utils.loadFrPickle(args.vocab_path)
 	print("Loading emotion label dict...")
@@ -70,12 +66,12 @@ def main():
 	print("Loading review tr_emodict...")
 	tr_emodict = Utils.loadFrPickle(args.tr_emodict_path)
 
-	# load field
+	# Load data field
 	print("Loading field...")
 	field = Utils.loadFrPickle(args.data_path)
 	test_loader = field['test']
 
-	# word embedding
+	# Initialize word embeddings
 	print("Initializing word embeddings...")
 	embedding = nn.Embedding(worddict.n_words, args.d_word_vec, padding_idx=Const.PAD)
 	if args.d_word_vec == 300:
@@ -87,7 +83,7 @@ def main():
 		embedding.weight.data.copy_(torch.from_numpy(np_embedding))
 	embedding.weight.requires_grad = False
 
-	# model type
+	# Choose the model
 	model = HiGRU(d_word_vec=args.d_word_vec,
 	              d_h1=args.d_h1,
 	              d_h2=args.d_h2,
@@ -103,10 +99,7 @@ def main():
 		focus_emo = Const.four_iem
 	print("Focused emotion labels {}".format(focus_emo))
 
-	# train, adjust lr w.r.t. hidden size
-	#args.lr *= math.pow(300/args.d_hidden_low * 300/args.d_hidden_up, 0.5)
-	#if args.load_model:
-	#	args.lr /= 2
+	# Train the model
 	emotrain(model=model,
 	         data_loader=field,
 	         tr_emodict=tr_emodict,
@@ -114,9 +107,8 @@ def main():
 	         args=args,
 	         focus_emo=focus_emo)
 
-	# test
+	# Load the best model to test
 	print("Load best models for testing!")
-
 	model = Utils.model_loader(args.save_dir, args.type, args.dataset)
 	pAccs = emoeval(model=model,
 	                data_loader=test_loader,
@@ -126,7 +118,7 @@ def main():
 	                focus_emo=focus_emo)
 	print("Test: ACCs-F1s-WA-UWA-F1-val {}".format(pAccs))
 
-	# record the test results
+	# Save the test results
 	record_file = '{}/{}_{}.txt'.format(args.save_dir, args.type, args.dataset)
 	if os.path.isfile(record_file):
 		f_rec = open(record_file, "a")
