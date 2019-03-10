@@ -1,4 +1,3 @@
-# HiGRU
-Semantic Quantization for Better Word Representation
+# HiGRU: Hierarchical Gated Recurrent Units for Utterance-level Emotion Recognition 
 
-The project aims to quantify the semantic and syntactic information of each single words and incorporate such information into word vectors or related evaluation appoaches.
+This is the Pytorch implementation of [HiGRU: Hierarchical Gated Recurrent Units for Utterance-level Emotion Recognition ](https://naacl2019.org/program/accepted/) in NAACL-2019.
