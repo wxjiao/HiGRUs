@@ -82,7 +82,7 @@ def emotrain(model, data_loader, tr_emodict, emodict, args, focus_emo):
 
 		# validate
 		pAccs = emoeval(model=model, data_loader=dev_loader, tr_emodict=tr_emodict, emodict=emodict, args=args, focus_emo=focus_emo)
-		print("Validate: ACCs-F1s-WA-UWA-F1-val {}".format(pAccs))
+		print("Validate: ACCs-WA-UWA {}".format(pAccs))
 
 		last_best = pAccs[-1]  # UWA
 		if args.dataset in ['IEMOCAP4v2']:
