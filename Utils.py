@@ -169,7 +169,7 @@ def shuffle_lists(featllist, labellist=None, thirdparty=None):
 		featllist, labellist, thirdparty = zip(*combined)
 		return featllist, labellist, thirdparty
 
-# clipping could be down by Pytorch function: torch.nn.utils.clip_grad_norm_
+# clipping could be done by Pytorch function: torch.nn.utils.clip_grad_norm_
 def param_clip(model, optimizer, batch_size, max_norm=10):
 	# gradient clipping
 	shrink_factor = 1
