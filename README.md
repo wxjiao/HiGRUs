@@ -15,7 +15,7 @@ For each dataset, we need to preprocess it using the `Preprocess.py` file as:
 ```
 python Preprocess.py -emoset Friends -min_count 2 -max_length 60
 ```
-The arguments `emoset`, `min_count`, and `max_length` represent the dataset name, the minimum frequency of words when building
+The arguments `-emoset`, `-min_count`, and `-max_length` represent the dataset name, the minimum frequency of words when building
 the vocabulary, and the max_length for padding or truncating sentences.
 
 #### Train
@@ -40,4 +40,6 @@ python EmoMain.py \
 -dataset Friends \
 -embedding Friends_embedding.pt
 ```
+
+The implementation supports both CPU and GPU (but only one GPU), you need to specify the device number of GPU in your arguments otherwise the model will be trained in CPU. There are **three** modes in this implementation, i.e., `higru`, `higru-f`, and `higru-sf`, as described in the paper. You can select one of them by the argument `-type`. The default sizes of the hidden states in the GRUs are 300, but smaller values also work well (larger ones may result in over-fitting).
 
