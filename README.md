@@ -10,14 +10,17 @@ Please find the datasets via the following links:
 
 
 ## Run
-The .sh file can be executed directly using the default settings. You can also try other parameters:
+You can run the 'exec_emo.sh' file in you **Bash** as:
+'bash exec_emo.sh'
 
+Or you can set up the model parameters yourself:
+'
 python EmoMain.py \
--lr $LR \
--gpu $GPU \
+-lr 2e-4 \
+-gpu 0 \
 -type higru-sf \
--d_h1 $du \
--d_h2 $dc \
+-d_h1 300 \
+-d_h2 300 \
 -report_loss 720 \
 -data_path Friends_data.pt \
 -vocab_path Friends_vocab.pt \
@@ -25,4 +28,5 @@ python EmoMain.py \
 -tr_emodict_path Friends_tr_emodict.pt \
 -dataset Friends \
 -embedding Friends_embedding.pt
+'
 
