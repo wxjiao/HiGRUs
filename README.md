@@ -10,6 +10,15 @@ Please find the datasets via the following links:
 
 
 ## Run
+#### Data Preprocessing
+For each dataset, we need to preprocess it using the `Preprocess.py` file as:
+```
+python Preprocess.py -emoset Friends -min_count 2 -max_length 60
+```
+The arguments `emoset`, `min_count`, and `max_length` represent the dataset name, the minimum frequency of words when building
+the vocabulary, and the max_length for padding or truncating sentences.
+
+#### Train
 You can run the `exec_emo.sh` file in you **Bash** as:
 ```
 bash exec_emo.sh
