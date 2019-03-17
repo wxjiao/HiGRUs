@@ -11,12 +11,12 @@ Please find the datasets via the following links:
 
 ## Run
 You can run the `exec_emo.sh` file in you **Bash** as:
-`
+```
 bash exec_emo.sh
-`
+```
 
 Or you can set up the model parameters yourself:
-`
+```
 python EmoMain.py \
 -lr 2e-4 \
 -gpu 0 \
@@ -30,5 +30,5 @@ python EmoMain.py \
 -tr_emodict_path Friends_tr_emodict.pt \
 -dataset Friends \
 -embedding Friends_embedding.pt
-`
+```
 
