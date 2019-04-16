@@ -127,8 +127,9 @@ def emoeval(model, data_loader, tr_emodict, emodict, args, focus_emo):
 		weight_rate = 0
 	weights = torch.from_numpy(loss_weight(tr_emodict, emodict, focus_emo, rate=weight_rate)).float()
 
-	acc = np.zeros([emodict.n_words], dtype=np.long) # recall
-	num = np.zeros([emodict.n_words], dtype=np.long) # gold
+	TP = np.zeros([emodict.n_words], dtype=np.long) # recall
+	TP_FN = np.zeros([emodict.n_words], dtype=np.long) # gold
+	focus_idx = [emodict.word2index[emo] for emo in focus_emo]
 
 	feats, labels = data_loader['feat'], data_loader['label']
 	val_loss = 0
@@ -158,20 +159,19 @@ def emoeval(model, data_loader, tr_emodict, emodict, args, focus_emo):
 
 		for lb in range(emo_true.size(0)):
 			idx = emo_true[lb].item()
-			num[idx] += 1
-			if emo_true[lb] == emo_predidx[lb]:
-				acc[idx] += 1
+			TP_FN[idx] += 1
+			if idx in focus_idx:
+				if emo_true[lb] == emo_predidx[lb]:
+					TP[idx] += 1
 
-	pacc = [acc[i] for i in range(emodict.n_words) if emodict.index2word[i] in focus_emo]
-	pnum = [num[i] for i in range(emodict.n_words) if emodict.index2word[i] in focus_emo]
-	pwACC = sum(pacc) / sum(pnum) * 100
-	ACCs = [np.round(acc[i] / num[i] * 100, 2) if num[i] != 0 else 0 for i in range(emodict.n_words)]
-	pACCs = [ACCs[i] for i in range(emodict.n_words) if emodict.index2word[i] in focus_emo]
-	paACC = sum(pACCs) / len(pACCs)
-	pACCs = [ACCs[emodict.word2index[w]] for w in focus_emo] # recall
+	f_TP = [TP[emodict.word2index[w]] for w in focus_emo]
+	f_TP_FN = [TP_FN[emodict.word2index[w]] for w in focus_emo]
+	Recall = [np.round(tp/tp_fn*100, 2) if tp_fn>0 else 0 for tp,tp_fn in zip(f_TP,f_TP_FN)]
+	wRecall = sum([r * w / sum(f_TP_FN) for r,w in zip(Recall, f_TP_FN)])
+	uRecall = sum(Recall) / len(Recall)
 
 	# Accuracy of each class w.r.t. the focus_emo, the weighted acc, and the unweighted acc
-	Total = pACCs + [np.round(pwACC,2), np.round(paACC,2)]
+	Total = Recall + [np.round(wRecall,2), np.round(uRecall,2)]
 
 	# Return to .train() state after validation
 	model.train()
