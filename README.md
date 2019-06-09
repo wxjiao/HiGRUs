@@ -47,10 +47,11 @@ There are some other arguments in the `EmoMain.py` file, e.g., the decay rate fo
 # Citation
 Please kindly cite our paper:
 ```
-@article{jiao2019higru,
-  title={HiGRU: Hierarchical Gated Recurrent Units for Utterance-level Emotion Recognition},
+@inproceedings{jiao2019higru,
+  title={HiGRU: Hierarchical Gated Recurrent Units for Utterance-Level Emotion Recognition},
   author={Jiao, Wenxiang and Yang, Haiqin and King, Irwin and Lyu, Michael R},
-  journal={arXiv preprint arXiv:1904.04446},
+  booktitle={Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)},
+  pages={397--406},
   year={2019}
 }
 ```
