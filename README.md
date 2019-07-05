@@ -2,14 +2,14 @@
 
 This is the Pytorch implementation of [HiGRU: Hierarchical Gated Recurrent Units for Utterance-level Emotion Recognition ](https://www.aclweb.org/anthology/N19-1037) in NAACL-2019.
 
-## Dataset
+## 1. Dataset
 Please find the datasets via the following links:
-  1. [Friends](http://doraemon.iis.sinica.edu.tw/emotionlines): **Friends** comes from the transcripts of Friends TV Sitcom, where each dialogue in the dataset consists of a scene of multiple speakers.
-  2. [EmotionPush](http://doraemon.iis.sinica.edu.tw/emotionlines): **EmotionPush** comes from private conversations between friends on the Facebook messenger collected by an App called EmotionPush.
-  3. [IEMOCAP](https://sail.usc.edu/iemocap/): **IEMOCAP** contains approximately 12 hours of audiovisual data, including video, speech, motion capture of face, text transcriptions.
+  - [Friends](http://doraemon.iis.sinica.edu.tw/emotionlines): **Friends** comes from the transcripts of Friends TV Sitcom, where each dialogue in the dataset consists of a scene of multiple speakers.
+  - [EmotionPush](http://doraemon.iis.sinica.edu.tw/emotionlines): **EmotionPush** comes from private conversations between friends on the Facebook messenger collected by an App called EmotionPush.
+  - [IEMOCAP](https://sail.usc.edu/iemocap/): **IEMOCAP** contains approximately 12 hours of audiovisual data, including video, speech, motion capture of face, text transcriptions.
 
 
-## Run
+## 2. Run
 #### Data Preprocessing
 For each dataset, we need to preprocess it using the `Preprocess.py` file as:
 ```ruby
@@ -40,15 +40,15 @@ python EmoMain.py \
 -dataset Friends \
 -embedding Friends_embedding.pt
 ```
-**More Details**
-- The implementation supports both CPU and GPU (but only one GPU), you need to specify the device number of GPU in your arguments otherwise the model will be trained in CPU. 
-- There are **three** modes in this implementation, i.e., `higru`, `higru-f`, and `higru-sf`, as described in the paper. You can select one of them by the argument `-type`. 
-- The default sizes of the hidden states in the GRUs are 300, but smaller values also work well (larger ones may result in over-fitting). 
-- You have to load in the data produced by the `Preprocess.py` file, e.g., including `Friends_data.pt`, `Friends_vocab.pt`, `Friends_emodict.pt`, and `Friends_tr_emodict.pt`, as well as the dataset name `Friends`. 
-- The argument `-embedding` is optional that you can load in the embeddings saved by the first run or the implementation will initialize it every time (which is time-consuming).
-- There are some other arguments in the `EmoMain.py` file, e.g., the decay rate for learning rate, the patience for early stopping. You can find out and change them if necessary.
+More Details:
+  - The implementation supports both CPU and GPU (but only one GPU), you need to specify the device number of GPU in your arguments otherwise the model will be trained in CPU. 
+  - There are **three** modes in this implementation, i.e., `higru`, `higru-f`, and `higru-sf`, as described in the paper. You can select one of them by the argument `-type`. 
+  - The default sizes of the hidden states in the GRUs are 300, but smaller values also work well (larger ones may result in over-fitting). 
+  - You have to load in the data produced by the `Preprocess.py` file, e.g., including `Friends_data.pt`, `Friends_vocab.pt`, `Friends_emodict.pt`, and `Friends_tr_emodict.pt`, as well as the dataset name `Friends`. 
+  - The argument `-embedding` is optional that you can load in the embeddings saved by the first run or the implementation will initialize it every time (which is time-consuming).
+  - There are some other arguments in the `EmoMain.py` file, e.g., the decay rate for learning rate, the patience for early stopping. You can find out and change them if necessary.
 
-# Citation
+# 3. Citation
 Please kindly cite our paper:
 ```ruby
 @inproceedings{jiao2019higru,
