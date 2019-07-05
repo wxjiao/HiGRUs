@@ -4,9 +4,9 @@ This is the Pytorch implementation of [HiGRU: Hierarchical Gated Recurrent Units
 
 ## Dataset
 Please find the datasets via the following links:
-  1. [Friends](http://doraemon.iis.sinica.edu.tw/emotionlines)
-  2. [EmotionPush](http://doraemon.iis.sinica.edu.tw/emotionlines)
-  3. [IEMOCAP](https://sail.usc.edu/iemocap/)
+  1. [Friends](http://doraemon.iis.sinica.edu.tw/emotionlines): **Friends** comes from the transcripts of Friends TV Sitcom, where each dialogue in the dataset consists of a scene of multiple speakers.
+  2. [EmotionPush](http://doraemon.iis.sinica.edu.tw/emotionlines): **EmotionPush** comes from private conversations between friends on the Facebook messenger collected by an App called EmotionPush.
+  3. [IEMOCAP](https://sail.usc.edu/iemocap/): **IEMOCAP** contains approximately 12 hours of audiovisual data, including video, speech, motion capture of face, text transcriptions.
 
 
 ## Run
