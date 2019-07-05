@@ -19,7 +19,7 @@ The arguments `-emoset`, `-min_count`, and `-max_length` represent the dataset n
 the vocabulary, and the max_length for padding or truncating sentences.
 
 #### Train
-You can run the `exec_emo.sh` file in you **Bash** as:
+You can run the `exec_emo.sh` file in **Bash** as:
 ```ruby
 bash exec_emo.sh
 ```
