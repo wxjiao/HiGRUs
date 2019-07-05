@@ -12,7 +12,7 @@ Please find the datasets via the following links:
 ## Run
 #### Data Preprocessing
 For each dataset, we need to preprocess it using the `Preprocess.py` file as:
-```
+```ruby
 python Preprocess.py -emoset Friends -min_count 2 -max_length 60
 ```
 The arguments `-emoset`, `-min_count`, and `-max_length` represent the dataset name, the minimum frequency of words when building
@@ -20,12 +20,12 @@ the vocabulary, and the max_length for padding or truncating sentences.
 
 #### Train
 You can run the `exec_emo.sh` file in you **Bash** as:
-```
+```ruby
 bash exec_emo.sh
 ```
 
 Or you can set up the model parameters yourself:
-```
+```ruby
 python EmoMain.py \
 -lr 2e-4 \
 -gpu 0 \
@@ -40,13 +40,17 @@ python EmoMain.py \
 -dataset Friends \
 -embedding Friends_embedding.pt
 ```
-
-The implementation supports both CPU and GPU (but only one GPU), you need to specify the device number of GPU in your arguments otherwise the model will be trained in CPU. There are **three** modes in this implementation, i.e., `higru`, `higru-f`, and `higru-sf`, as described in the paper. You can select one of them by the argument `-type`. The default sizes of the hidden states in the GRUs are 300, but smaller values also work well (larger ones may result in over-fitting). You have to load in the data produced by the `Preprocess.py` file, e.g., including `Friends_data.pt`, `Friends_vocab.pt`, `Friends_emodict.pt`, and `Friends_tr_emodict.pt`, as well as the dataset name `Friends`. The argument `-embedding` is optional that you can load in the embeddings saved by the first run or the implementation will initialize it every time (which is time-consuming).
-There are some other arguments in the `EmoMain.py` file, e.g., the decay rate for learning rate, the patience for early stopping. You can find out and change them if necessary.
+**More Details**
+- The implementation supports both CPU and GPU (but only one GPU), you need to specify the device number of GPU in your arguments otherwise the model will be trained in CPU. 
+- There are **three** modes in this implementation, i.e., `higru`, `higru-f`, and `higru-sf`, as described in the paper. You can select one of them by the argument `-type`. 
+- The default sizes of the hidden states in the GRUs are 300, but smaller values also work well (larger ones may result in over-fitting). 
+- You have to load in the data produced by the `Preprocess.py` file, e.g., including `Friends_data.pt`, `Friends_vocab.pt`, `Friends_emodict.pt`, and `Friends_tr_emodict.pt`, as well as the dataset name `Friends`. 
+-The argument `-embedding` is optional that you can load in the embeddings saved by the first run or the implementation will initialize it every time (which is time-consuming).
+-There are some other arguments in the `EmoMain.py` file, e.g., the decay rate for learning rate, the patience for early stopping. You can find out and change them if necessary.
 
 # Citation
 Please kindly cite our paper:
-```
+```ruby
 @inproceedings{jiao2019higru,
   title={HiGRU: Hierarchical Gated Recurrent Units for Utterance-Level Emotion Recognition},
   author={Jiao, Wenxiang and Yang, Haiqin and King, Irwin and Lyu, Michael R},
