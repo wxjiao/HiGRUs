@@ -10,6 +10,12 @@ Please find the datasets via the following links:
 
 
 ## 2. Run
+
+### Prerequisites
+- Python v3.6
+- Pytorch v0.4.0-v0.4.1
+- Pickle
+
 ### Data Preprocessing
 For each dataset, we need to preprocess it using the `Preprocess.py` file as:
 ```ruby
