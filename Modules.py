@@ -61,6 +61,7 @@ class GRUencoder(nn.Module):
 		s_embs = sent_embs.index_select(1, Variable(idx_sort))
 
 		# padding
+		s_lens = s_lens.copy()
 		sent_packed = pack_padded_sequence(s_embs, s_lens)
 		sent_output = self.gru(sent_packed)[0]
 		sent_output = pad_packed_sequence(sent_output, total_length=sent.size(1))[0]
