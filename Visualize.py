@@ -119,8 +119,8 @@ def main():
 	print("Test: ACCs-WA-UWA {}".format(pAccs))
 
 	# Take the pre-softmax weights
-  presoft = model.classifier[-1].weight
-  print(presoft.size())
+ 	presoft = model.classifier[-1].weight
+	print(presoft.size())
 
 
 if __name__ == '__main__':
