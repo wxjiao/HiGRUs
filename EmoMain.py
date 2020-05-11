@@ -27,7 +27,7 @@ def main():
 	# Data
 	parser.add_argument('-dataset', type=str, default='Friends',	# Default dataset Friends
 	                    help='dataset')
-	parser.add_argument('-data_path', type=str, required = True
+	parser.add_argument('-data_path', type=str, required = True,
 	                    help='data path')
 	parser.add_argument('-vocab_path', type=str, required=True,
 	                    help='vocabulary path')
@@ -38,7 +38,7 @@ def main():
 	parser.add_argument('-max_seq_len', type=int, default=80,	# Pad each utterance to 80 tokens
 	                    help='the sequence length')
 	# model
-	parser.add_argument('-type', type=str, default='higru', 	# Model type: default HiGRU 
+	parser.add_argument('-type', type=str, default='higru', 	# Model type: default HiGRU
 	                    help='choose the low encoder')
 	parser.add_argument('-d_word_vec', type=int, default=300,	# Embeddings size 300
 	                    help='the word embeddings size')
