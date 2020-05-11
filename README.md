@@ -19,7 +19,7 @@ Please find the datasets via the following links:
 ### Data Preprocessing
 For each dataset, we need to preprocess it using the `Preprocess.py` file as:
 ```ruby
-python Preprocess.py -emoset Friends -min_count 2 -max_length 60
+python Preprocess.py -emoset Friends -min_count 2 -max_seq_len 60
 ```
 The arguments `-emoset`, `-min_count`, and `-max_length` represent the dataset name, the minimum frequency of words when building
 the vocabulary, and the max_length for padding or truncating sentences.
