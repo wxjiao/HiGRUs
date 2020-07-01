@@ -29,7 +29,7 @@ To reproduce the results reported in the paper, please adopt the pre-trained wor
 - Word2Vec: [GoogleNews-vectors-negative300.bin.gz](https://code.google.com/archive/p/word2vec/)
 - GloVe: [glove.840B.300d.zip](https://nlp.stanford.edu/projects/glove/)
 
-Decompress the files and re-name them as `word2vec300.bin` and `glove30.txt`, respectively.
+Decompress the files and re-name them as `word2vec300.bin` and `glove300.txt`, respectively.
 
 ### Train
 You can run the `exec_emo.sh` file in **Bash** as:
