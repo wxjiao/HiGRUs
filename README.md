@@ -24,6 +24,13 @@ python Preprocess.py -emoset Friends -min_count 2 -max_seq_len 60
 The arguments `-emoset`, `-min_count`, and `-max_length` represent the dataset name, the minimum frequency of words when building
 the vocabulary, and the max_length for padding or truncating sentences.
 
+### Pre-trained Word Embeddings
+To reproduce the results reported in the paper, please adopt the pre-trained word embeddings for initialization. You can download the 300-dimentional embeddings from below:
+- Word2Vec: [GoogleNews-vectors-negative300.bin.gz](https://code.google.com/archive/p/word2vec/)
+- GloVe: [glove.840B.300d.zip](https://nlp.stanford.edu/projects/glove/)
+
+Decompress the files and re-name them as `word2vec300.bin` and `glove30.txt`, respectively.
+
 ### Train
 You can run the `exec_emo.sh` file in **Bash** as:
 ```ruby
