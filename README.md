@@ -74,7 +74,7 @@ python EmoMain.py \
 Please kindly cite our paper:
 ```ruby
 @inproceedings{jiao2019higru,
-  title={HiGRU: Hierarchical Gated Recurrent Units for Utterance-Level Emotion Recognition},
+  title={{HiGRU}: Hierarchical Gated Recurrent Units for Utterance-Level Emotion Recognition},
   author={Jiao, Wenxiang and Yang, Haiqin and King, Irwin and Lyu, Michael R},
   booktitle={Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)},
   pages={397--406},
