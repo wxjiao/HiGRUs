@@ -89,7 +89,7 @@ Please kindly cite our paper:
 ```
 
 ### Interesting Variants of HiGRUs
-Below we selectively list some variants of our HiGRUs develped by other researchers:
+Below we selectively list some variants of our HiGRUs developed by other researchers:
 - **Bert-HiGRU**: Keeping Up Appearances: Computational Modeling of Face Acts in Persuasion Oriented Discussions. [paper](https://arxiv.org/pdf/2009.10815.pdf)
 - **HiTransformer**: Hierarchical Transformer Network for Utterance-level Emotion Recognition. [paper](https://arxiv.org/pdf/2002.07551.pdf)
 - **HAN-ReGRU**: Hierarchical attention network with residual gated recurrent unit for emotion recognition in conversation. [paper](https://link.springer.com/article/10.1007%2Fs00521-020-05063-7)
