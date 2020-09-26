@@ -20,6 +20,8 @@ Please find the datasets via the following links:
   - [EmotionPush](http://doraemon.iis.sinica.edu.tw/emotionlines): **EmotionPush** comes from private conversations between friends on the Facebook messenger collected by an App called EmotionPush.
   - [IEMOCAP](https://sail.usc.edu/iemocap/): **IEMOCAP** contains approximately 12 hours of audiovisual data, including video, speech, motion capture of face, text transcriptions.
 
+[HiGRUs storage](https://drive.google.com/drive/folders/172g0RdBjlN-lBO2a6iFlWIuzpnwSCSwB?usp=sharing) also provides a full collection of the three datasets in `.json` format preprocessed by us.
+
 #### Prerequisites
 - Python v3.6
 - Pytorch v0.4.0-v0.4.1
@@ -70,7 +72,9 @@ python EmoMain.py \
   - The argument `-embedding` is optional that you can load in the embeddings saved by the first run or the implementation will initialize it every time (which is time-consuming).
   - There are some other arguments in the `EmoMain.py` file, e.g., the decay rate for learning rate, the patience for early stopping. You can find out and change them if necessary.
 
-## Citation
+## Public Impact
+
+### Citation
 Please kindly cite our paper:
 ```ruby
 @inproceedings{jiao2019higru,
@@ -83,3 +87,10 @@ Please kindly cite our paper:
   year      = {2019}
 }
 ```
+
+### Interesting Variants of HiGRUs
+Below we selectively list some varinats of our HiGRU develped by other researchers:
+- Bert-HiGRU: Keeping Up Appearances: Computational Modeling of Face Acts in Persuasion Oriented Discussions. [paper](https://arxiv.org/pdf/2009.10815.pdf)
+- HiTransformer: Hierarchical Transformer Network for Utterance-level Emotion Recognition. [paper](https://arxiv.org/pdf/2002.07551.pdf)
+- HAN-ReGRU: Hierarchical attention network with residual gated recurrent unit for emotion recognition in conversation. [paper](https://link.springer.com/article/10.1007%2Fs00521-020-05063-7)
+
