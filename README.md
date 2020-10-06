@@ -1,6 +1,6 @@
 # HiGRU: Hierarchical Gated Recurrent Units for Utterance-level Emotion Recognition 
 
-This is the Pytorch implementation of [HiGRU: Hierarchical Gated Recurrent Units for Utterance-level Emotion Recognition ](https://www.aclweb.org/anthology/N19-1037) in NAACL-2019.
+This is the Pytorch implementation of HiGRU: Hierarchical Gated Recurrent Units for Utterance-level Emotion Recognition in NAACL-2019. [[paper]](https://www.aclweb.org/anthology/N19-1037)
 
 ## Brief Introduction
 
